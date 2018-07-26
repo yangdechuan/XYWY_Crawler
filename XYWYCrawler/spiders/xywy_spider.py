@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import requests_html
+import requests
+from lxml import etree
 
 from XYWYCrawler.items import XywycrawlerItem
 
@@ -21,7 +23,6 @@ class XywySpiderSpider(scrapy.Spider):
 
     def parse(self, response):
         divs = response.xpath("//div[@class='club_dic']")
-        sess = requests_html.HTMLSession()
         for div in divs:
             keshi = div.xpath(".//var/a/text()").extract_first()
             title = div.xpath(".//em/a/text()").extract_first()
@@ -29,12 +30,9 @@ class XywySpiderSpider(scrapy.Spider):
             contents = div.xpath(".//div[@class='club_dic_p clearfix']/p/text()").extract()
             content = "\n".join(contents)
 
-            r = sess.get(url)
-            answers = []
-            answer_divs = r.html.xpath("//div[@class='docall clearfix ']")
-            for answer_div in answer_divs:
-                ans = answer_div.find("div")[12].text
-                answers.append(ans)
+            r = requests.get(url)
+            html_con = etree.HTML(r.content)
+            answers = html_con.xpath("//div[@class='docall clearfix ']//div[@class='pt15 f14 graydeep  pl20 pr20']/text()")
 
             item = XywycrawlerItem()
             item["title"] = title
