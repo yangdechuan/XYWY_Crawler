@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import logging
+
 import scrapy
 import requests_html
 import requests
@@ -7,6 +9,12 @@ from lxml import etree
 from XYWYCrawler.items import XywycrawlerItem
 
 class XywySpiderSpider(scrapy.Spider):
+    def __inti__(self):
+        logging.basicConfig(level=logging.DEBUG,
+                            datefmt="%a, %d %b %Y %H:%M:%S",
+                            filename="log.txt",
+                            filemode="w")
+
     name = 'xywy_spider'
     allowed_domains = ['club.xywy.com']
     # start_urls = ['http://club.xywy.com/']
@@ -19,6 +27,7 @@ class XywySpiderSpider(scrapy.Spider):
             tmp_urls = response.html.xpath("//ul[@class='club_Date clearfix']/li/a/@href")
             urls += tmp_urls
         for url in urls:
+            logging.info(url)
             yield scrapy.Request(url, callback=self.parse)
 
     def parse(self, response):
