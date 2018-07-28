@@ -16,3 +16,4 @@ class XywycrawlerItem(scrapy.Item):
     url = scrapy.Field()
     keshi = scrapy.Field()
     answers = scrapy.Field()
+    _id = scrapy.Field()
