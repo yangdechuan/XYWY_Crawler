@@ -26,7 +26,7 @@ class XywySpiderSpider(scrapy.Spider):
         urls = []
         cur_url = "http://club.xywy.com/keshi/{}.html"
         sess = requests_html.HTMLSession()
-        for i in range(2, 3):
+        for i in range(1, 65):
             response = sess.get(cur_url.format(i))
             tmp_urls = response.html.xpath("//ul[@class='club_Date clearfix']/li/a/@href")
             urls += tmp_urls
