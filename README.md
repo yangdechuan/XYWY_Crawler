@@ -1,4 +1,5 @@
-# 使用scrapy框架，爬取“寻医问药”网站所有问答。
+# 使用scrapy框架，爬取[寻医问药](http://www.xywy.com/)网站所有问题。
+
 ## 需要提前安装并开启mongodb数据库
 以ubuntu为例，安装配置方式如下：
 1. 安装mongodb
@@ -7,12 +8,14 @@ sudo apt-get install mongodb
 ```
 2. 启动mongodb
 ```
-service mongodb start
+service mo
+ngodb start
 ```
 ## 程序执行方式如下：
 ```
 scrapy crawl xywy_spider
 ```
+
 ## 在数据库中查看爬取的数据
 mongo命令进入数据库交互窗口
 ```
