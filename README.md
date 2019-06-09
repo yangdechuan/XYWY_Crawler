@@ -8,8 +8,7 @@ sudo apt-get install mongodb
 ```
 2. 启动mongodb
 ```
-service mo
-ngodb start
+service mongodb start
 ```
 ## 程序执行方式如下：
 ```
